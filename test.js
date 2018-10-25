@@ -1,7 +1,7 @@
 /* global describe, it */
 var util = require('util')
 var expect = require('chai').expect
-var sentenceCase = require('./')
+var noCase = require('./')
 
 /**
  * Automatically generate test suite from the array of rules.
@@ -72,18 +72,26 @@ var TESTS = [
 
   // https://github.com/blakeembrey/change-case/issues/21
   ['amazon s3 data', 'amazon s3 data'],
-  ['foo_13_bar', 'foo 13 bar']
+  ['foo_13_bar', 'foo 13 bar'],
+
+  // https://github.com/blakeembrey/change-case/issues/50
+  ['pricePer100Km', 'price per 100 km', null, null, { numbersAlwaysNewWord: true }],
+
+  // https://github.com/blakeembrey/no-case/issues/20
+  ['@myAttribute', '@my attribute', null, null, { ignoredCharacters: '@' }],
+  ['@myAttr.i*bute', '@my attr i*bute', null, null, { ignoredCharacters: '@*' }]
 ]
 
-describe('sentence case', function () {
+describe('no case', function () {
   TESTS.forEach(function (test) {
     var before = test[0]
     var after = test[1]
     var locale = test[2]
     var replacement = test[3]
+    var options = test[4]
 
     it(util.inspect(before) + ' -> ' + util.inspect(after), function () {
-      expect(sentenceCase(before, locale, replacement)).to.equal(after)
+      expect(noCase(before, locale, replacement, options)).to.equal(after)
     })
   })
 })

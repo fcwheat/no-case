@@ -6,7 +6,7 @@
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/no-case.svg)](https://greenkeeper.io/)
 
-Transform a string to lower space cased. Optional locale and replacement character supported.
+Transform a string to lower space cased. Optional locale and replacement character supported. Options parameter supports non-standard behavior. `numbersAlwaysNewWord` will ensure that numbers are always separated from other words. `ignoredCharacters` will ignore specified characters and not strip them out when removing non-word characters. 
 
 Supports Unicode (non-ASCII characters) and non-string entities, such as objects with a `toString` property, numbers and booleans. Empty values (`null` and `undefined`) will result in an empty string.
 
@@ -30,6 +30,12 @@ noCase('Beyoncé Knowles') //=> "beyoncé knowles"
 noCase('A STRING', 'tr') //=> "a strıng"
 
 noCase('HELLO WORLD!', null, '_') //=> "hello_world"
+
+noCase('helloWorld123') // => hello world123
+noCase('helloWorld123', null, null, { numbersAlwaysNewWord: true }) // => hello world 123
+
+noCase('@myAttribute') // => my attribute
+noCase('@myAttribute', null, null, { ignoredCharacters: '@' }) // => @my attribute
 ```
 
 ## Typings
