@@ -20,12 +20,13 @@ module.exports = function (
   str,
   locale,
   replacement,
-  options = { ignoredCharacters: '', splitNumbers: false }
+  options
 ) {
   if (str == null) {
     return ''
   }
 
+  options = Object.assign({ ignoredCharacters: '', splitNumbers: false }, options)
   replacement = typeof replacement !== 'string' ? ' ' : replacement
 
   function replace (match, index, value) {
