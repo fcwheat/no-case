@@ -75,7 +75,7 @@ var TESTS = [
   ['foo_13_bar', 'foo 13 bar'],
 
   // https://github.com/blakeembrey/change-case/issues/50
-  ['pricePer100Km', 'price per 100 km', null, null, { numbersAlwaysNewWord: true }],
+  ['pricePer100Km', 'price per 100 km', null, null, { splitNumbers: true }],
 
   // https://github.com/blakeembrey/no-case/issues/20
   ['@myAttribute', '@my attribute', null, null, { ignoredCharacters: '@' }],

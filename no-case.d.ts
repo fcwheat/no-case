@@ -1,6 +1,6 @@
 interface Options {
     ignoredCharacters: string;
-    numbersAlwaysNewWord: boolean;
+    splitNumbers: boolean;
 }
 declare function noCase (value: string, locale?: string, replacement?: string, options?: Options): string;
 

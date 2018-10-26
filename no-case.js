@@ -13,20 +13,19 @@ var CAMEL_CASE_WITH_NUMBERS = require('./vendor/camel-case-with-numbers-regexp')
  * @param  {string}  replacement
  * @param  {object}  options
  * @param  {string}  options.ignoredCharacters
- * @param  {boolean} options.numbersAlwaysNewWord
+ * @param  {boolean} options.splitNumbers
  * @return {string}
  */
 module.exports = function (
   str,
   locale,
   replacement,
-  options = { ignoredCharacters: '', numbersAlwaysNewWord: false }
+  options = { ignoredCharacters: '', splitNumbers: false }
 ) {
   if (str == null) {
     return ''
   }
 
-  options = typeof options !== 'object' ? {} : options
   replacement = typeof replacement !== 'string' ? ' ' : replacement
 
   function replace (match, index, value) {
@@ -48,7 +47,7 @@ module.exports = function (
     // Support odd camel case ("CAMELCase" -> "CAMEL Case").
     .replace(CAMEL_CASE_UPPER_REGEXP, '$1 $2')
 
-  if (options.numbersAlwaysNewWord) {
+  if (options.splitNumbers) {
     str = str
       // Support always treating a number sequence as a new word ("camelCase123" -> "camel Case 123").
       .replace(CAMEL_CASE_WITH_NUMBERS, '$1 $2')
